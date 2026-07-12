@@ -53,42 +53,48 @@
 
         .header-section {
             min-height: 80vh;
-            display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+            display: flex; flex-direction: column; justify-content: space-between; align-items: center; text-align: center;
             position: relative;
-            background-image: url('1.jpeg?v=b4f8de12');
+            background-image: url('1.jpeg?v=aa8c8e7b');
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
             background-color: rgba(0, 0, 0, 0.4);
             background-blend-mode: multiply;
-            padding: 120px 30px; margin-bottom: 30px;
+            padding: 55px 25px 40px 25px; margin-bottom: 30px;
         }
 
         @media (max-width: 480px) {
-            .header-section { background-size: cover; padding: 140px 20px 100px 20px; }
+            .header-section { background-size: cover; padding: 50px 15px 35px 15px; }
             .container { margin: 0 auto; border-width: 5px; }
             .container::after { top: 5px; left: 5px; right: 5px; bottom: 5px; }
-            .name-text { font-size: 3.8rem !important; }
         }
 
-        .top-date { font-size: 1.4rem; letter-spacing: 3px; margin-bottom: 20px; font-weight: 700; color: var(--accent-color); text-shadow: 0 2px 8px rgba(0,0,0,0.55); }
-        .names-wrapper { margin: 30px 0; }
+        .names-badge {
+            display: inline-block;
+            border: 1.5px solid var(--accent-color);
+            border-radius: 14px;
+            padding: 14px 22px;
+            background: rgba(0,0,0,0.18);
+        }
 
-        .name-text {
+        .names-badge-text {
             font-family: 'Cormorant Garamond', serif;
             font-style: italic;
-            font-weight: 300;
-            font-size: 4.5rem;
-            line-height: 1.1;
+            font-weight: 600;
+            font-size: clamp(1.7rem, 8vw, 2.7rem);
+            letter-spacing: 0.5px;
+            line-height: 1.2;
+            white-space: nowrap;
             color: var(--accent-color);
-            text-shadow: 0 2px 10px rgba(0,0,0,0.55);
+            text-shadow: 0 2px 8px rgba(0,0,0,0.55);
         }
 
-        .first-letter { font-size: 1.1em; margin-right: -2px; }
+        .header-bottom { display: flex; flex-direction: column; align-items: center; gap: 18px; }
 
-        .ampersand { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 300; color: var(--accent-color); margin: 15px 0; text-shadow: 0 2px 8px rgba(0,0,0,0.55); }
+        .top-date { font-size: 1.4rem; letter-spacing: 3px; font-weight: 700; color: var(--accent-color); text-shadow: 0 2px 8px rgba(0,0,0,0.55); }
 
-        .scroll-hint { position: absolute; bottom: 20px; animation: bounce 2s infinite; color: var(--accent-color); font-size: 1.5rem; text-shadow: 0 2px 8px rgba(0,0,0,0.55); }
+        .scroll-hint { animation: bounce 2s infinite; color: var(--accent-color); font-size: 1.5rem; text-shadow: 0 2px 8px rgba(0,0,0,0.55); }
 
         @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 40% {transform: translateY(-10px);} 60% {transform: translateY(-5px);} }
 
@@ -184,31 +190,58 @@
         }
         .rsvp-message.success { display: block; background: #eaf7ea; color: #2e7d32; border: 1px solid #b7e0b8; }
         .rsvp-message.error { display: block; background: #fdecea; color: #c62828; border: 1px solid #f5c1bd; }
+
+        .music-fab {
+            position: fixed; z-index: 1000; visibility: hidden;
+            display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+            padding: 15px 28px; border-radius: 40px;
+            background: rgba(0,0,0,0.35); border: 1.5px solid var(--accent-color);
+            color: var(--accent-color); font-family: 'Cormorant Garamond', serif;
+            font-size: 1.05rem; font-weight: 700; letter-spacing: 0.5px;
+            cursor: pointer; box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+        }
+        .music-fab.is-positioned { visibility: visible; }
+        .music-fab.is-morphing {
+            transition: top 0.4s ease, left 0.4s ease, width 0.4s ease, height 0.4s ease,
+                        background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease,
+                        border-radius 0.4s ease, padding 0.4s ease;
+        }
+        .music-fab i { font-size: 1.1rem; }
+        .music-fab-text { white-space: nowrap; transition: opacity 0.2s ease, width 0.3s ease; }
+
+        .music-fab.is-collapsed {
+            width: 46px; height: 46px; padding: 0; border-radius: 50%;
+            background: rgba(255,255,255,0.9); border: none; color: var(--primary-color);
+        }
+        .music-fab.is-collapsed .music-fab-text {
+            opacity: 0; width: 0; overflow: hidden; margin: 0;
+        }
+        .music-fab.is-collapsed i { margin-left: 2px; }
     </style>
 </head>
 <body>
 
-    <audio id="bg-music">
+    <audio id="bg-music" loop>
         <source src="music.mp3" type="audio/mpeg">
     </audio>
+
+    <button id="musicToggle" class="music-fab" aria-label="Музыканы ойнотуу">
+        <i class="fa-solid fa-play"></i>
+        <span class="music-fab-text">музыканы жандыруу</span>
+    </button>
 
     <div class="container">
 
         <div class="header-section" data-aos="fade-in" data-aos-duration="1500">
-            <div class="top-date" data-aos="fade-down" data-aos-delay="300">07.08.2026</div>
-
-            <div class="names-wrapper">
-                <div class="name-text" data-aos="zoom-in-right" data-aos-delay="500">
-                    <span class="first-letter">А</span>риет
-                </div>
-                <div class="ampersand" data-aos="zoom-in" data-aos-delay="700">&</div>
-                <div class="name-text" data-aos="zoom-in-left" data-aos-delay="900">
-                    <span class="first-letter">Ж</span>умагүл
-                </div>
+            <div class="names-badge" data-aos="zoom-in" data-aos-delay="300">
+                <span class="names-badge-text">Ариет & Жумагүл</span>
             </div>
 
-            <div class="scroll-hint">
-                <i class="fa-solid fa-chevron-down"></i>
+            <div class="header-bottom">
+                <div class="top-date" id="topDate" data-aos="fade-up" data-aos-delay="300">07.08.2026</div>
+                <div class="scroll-hint">
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
             </div>
         </div>
 
@@ -283,7 +316,7 @@
         <div class="section" data-aos="fade-up" style="padding-bottom: 20px;">
             <div class="divider-ornament">❧</div>
             <h2>Дареги:</h2>
-            <div style="font-size: 0.9rem; text-transform: uppercase; margin-bottom: 5px; color: #888;">Той залы</div>
+            <!-- <div style="font-size: 0.9rem; text-transform: uppercase; margin-bottom: 5px; color: #888;">Той залы</div> -->
             <div class="location-title">«MERRI GARDEN»</div>
             <div class="location-address">Нурматов көчөсү, 82/9, Ош ш.</div>
 
@@ -350,26 +383,109 @@
 
         // МУЗЫКА
         const audio = document.getElementById("bg-music");
-        let hasStarted = false;
+        const musicToggle = document.getElementById("musicToggle");
+        const musicIcon = musicToggle.querySelector("i");
 
-        function startMusic() {
-            if (!hasStarted) {
-                audio.play().then(() => {
-                    hasStarted = true;
-                    document.removeEventListener('click', startMusic);
-                    document.removeEventListener('touchstart', startMusic);
-                    setTimeout(function() {
-                        audio.pause();
-                        audio.currentTime = 0;
-                    }, 10000);
-                }).catch(e => {
+        musicToggle.addEventListener("click", function() {
+            if (audio.paused) {
+                audio.play().catch(function() {
                     console.log("Музыка блоктолду.");
                 });
+            } else {
+                audio.pause();
+            }
+        });
+
+        audio.addEventListener("play", function() {
+            musicIcon.classList.remove("fa-play");
+            musicIcon.classList.add("fa-pause");
+        });
+
+        audio.addEventListener("pause", function() {
+            musicIcon.classList.remove("fa-pause");
+            musicIcon.classList.add("fa-play");
+        });
+
+        // МУЗЫКА БАТИРМАСЫНЫН ОРУН АЛУУСУ (даталын үстүндөгү пилден бурчтагы түймөгө чейин)
+        const topDateEl = document.getElementById("topDate");
+        const containerEl = document.querySelector(".container");
+        const COLLAPSED_SIZE = 46;
+        let musicBtnCollapsed = false;
+        let expandedSize = null;
+        let morphTimer = null;
+
+        function measureExpandedSize() {
+            if (musicBtnCollapsed) return;
+            const rect = musicToggle.getBoundingClientRect();
+            if (rect.width > COLLAPSED_SIZE + 10) {
+                expandedSize = { width: rect.width, height: rect.height };
             }
         }
 
-        document.addEventListener('click', startMusic);
-        document.addEventListener('touchstart', startMusic);
+        function updateMusicBtnPosition() {
+            if (musicBtnCollapsed) {
+                const containerRect = containerEl.getBoundingClientRect();
+                musicToggle.style.top = "18px";
+                musicToggle.style.left = (containerRect.right - 18 - COLLAPSED_SIZE) + "px";
+            } else if (expandedSize) {
+                const dateRect = topDateEl.getBoundingClientRect();
+                musicToggle.style.top = (dateRect.top - expandedSize.height - 16) + "px";
+                musicToggle.style.left = (dateRect.left + dateRect.width / 2 - expandedSize.width / 2) + "px";
+            }
+            musicToggle.classList.add("is-positioned");
+        }
+
+        function morphMusicBtn(collapse) {
+            if (collapse === musicBtnCollapsed) return;
+            musicToggle.classList.add("is-morphing");
+            musicBtnCollapsed = collapse;
+            musicToggle.classList.toggle("is-collapsed", collapse);
+            updateMusicBtnPosition();
+            clearTimeout(morphTimer);
+            morphTimer = setTimeout(function() {
+                musicToggle.classList.remove("is-morphing");
+            }, 450);
+        }
+
+        measureExpandedSize();
+        updateMusicBtnPosition();
+
+        window.addEventListener("load", function() {
+            measureExpandedSize();
+            updateMusicBtnPosition();
+        });
+        setTimeout(function() {
+            measureExpandedSize();
+            updateMusicBtnPosition();
+        }, 1500);
+
+        let scrollTicking = false;
+        window.addEventListener("scroll", function() {
+            if (!scrollTicking) {
+                requestAnimationFrame(function() {
+                    updateMusicBtnPosition();
+                    scrollTicking = false;
+                });
+                scrollTicking = true;
+            }
+        });
+
+        let resizeTimer;
+        window.addEventListener("resize", function() {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(function() {
+                measureExpandedSize();
+                updateMusicBtnPosition();
+            }, 150);
+        });
+
+        const musicBtnObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                morphMusicBtn(entry.intersectionRatio < 0.5);
+            });
+        }, { threshold: [0, 0.5, 1] });
+
+        musicBtnObserver.observe(document.querySelector(".header-section"));
 
         // ТАЙМЕР
         const weddingDate = new Date("August 7, 2026 17:00:00").getTime();

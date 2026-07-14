@@ -7,7 +7,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Marck+Script&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -55,12 +55,10 @@
             min-height: 80vh;
             display: flex; flex-direction: column; justify-content: space-between; align-items: center; text-align: center;
             position: relative;
-            background-image: url('1.jpeg?v=aa8c8e7b');
+            background-image: url('1.jpeg?v=e21fd6f6');
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
-            background-color: rgba(0, 0, 0, 0.4);
-            background-blend-mode: multiply;
             padding: 55px 25px 40px 25px; margin-bottom: 30px;
         }
 
@@ -70,29 +68,32 @@
             .container::after { top: 5px; left: 5px; right: 5px; bottom: 5px; }
         }
 
-        .names-badge {
-            display: inline-block;
-            border: 1.5px solid var(--accent-color);
-            border-radius: 14px;
-            padding: 14px 22px;
-            background: rgba(0,0,0,0.18);
+        .monogram {
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
         }
 
-        .names-badge-text {
-            font-family: 'Cormorant Garamond', serif;
-            font-style: italic;
-            font-weight: 600;
-            font-size: clamp(1.7rem, 8vw, 2.7rem);
-            letter-spacing: 0.5px;
-            line-height: 1.2;
-            white-space: nowrap;
-            color: var(--accent-color);
-            text-shadow: 0 2px 8px rgba(0,0,0,0.55);
+        .monogram-letter {
+            font-family: 'Marck Script', cursive;
+            font-weight: 400;
+            font-size: clamp(6rem, 30vw, 10rem);
+            line-height: 1;
+            color: #000;
+            text-shadow: 0 0 14px rgba(255,255,255,0.45), 3px 4px 6px rgba(0,0,0,0.35);
+        }
+
+        .monogram-amp {
+            font-family: 'Marck Script', cursive;
+            font-size: clamp(2.2rem, 9vw, 3.2rem);
+            line-height: 1;
+            color: #000;
+            transform: rotate(-18deg);
+            margin: -0.3em 0;
+            text-shadow: 0 0 10px rgba(255,255,255,0.45), 2px 3px 5px rgba(0,0,0,0.3);
         }
 
         .header-bottom { display: flex; flex-direction: column; align-items: center; gap: 18px; }
 
-        .top-date { font-size: 1.4rem; letter-spacing: 3px; font-weight: 700; color: var(--accent-color); text-shadow: 0 2px 8px rgba(0,0,0,0.55); }
+        .top-date { font-size: 1.4rem; letter-spacing: 3px; font-weight: 700; color: #000; text-shadow: 0 0 10px rgba(255,255,255,0.5), 2px 3px 5px rgba(0,0,0,0.3); }
 
         .scroll-hint { animation: bounce 2s infinite; color: var(--accent-color); font-size: 1.5rem; text-shadow: 0 2px 8px rgba(0,0,0,0.55); }
 
@@ -195,10 +196,11 @@
             position: fixed; z-index: 1000; visibility: hidden;
             display: inline-flex; align-items: center; justify-content: center; gap: 10px;
             padding: 15px 28px; border-radius: 40px;
-            background: rgba(0,0,0,0.35); border: 1.5px solid var(--accent-color);
-            color: var(--accent-color); font-family: 'Cormorant Garamond', serif;
+            background: rgba(255,255,255,0.35); border: 1.5px solid #000;
+            color: #000; font-family: 'Cormorant Garamond', serif;
             font-size: 1.05rem; font-weight: 700; letter-spacing: 0.5px;
             cursor: pointer; box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+            text-shadow: 0 1px 4px rgba(255,255,255,0.6);
         }
         .music-fab.is-positioned { visibility: visible; }
         .music-fab.is-morphing {
@@ -211,7 +213,7 @@
 
         .music-fab.is-collapsed {
             width: 46px; height: 46px; padding: 0; border-radius: 50%;
-            background: rgba(255,255,255,0.9); border: none; color: var(--primary-color);
+            background: rgba(255,255,255,0.9); border: none; color: #000;
         }
         .music-fab.is-collapsed .music-fab-text {
             opacity: 0; width: 0; overflow: hidden; margin: 0;
@@ -233,8 +235,10 @@
     <div class="container">
 
         <div class="header-section" data-aos="fade-in" data-aos-duration="1500">
-            <div class="names-badge" data-aos="zoom-in" data-aos-delay="300">
-                <span class="names-badge-text">Ариет & Жумагүл</span>
+            <div class="monogram" data-aos="zoom-in" data-aos-delay="300">
+                <span class="monogram-letter">А</span>
+                <span class="monogram-amp">&</span>
+                <span class="monogram-letter">Ж</span>
             </div>
 
             <div class="header-bottom">
